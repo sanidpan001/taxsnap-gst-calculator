@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TaxSnap — Free GST Calculator India | Inclusive, Exclusive & Reverse GST</title>
+<meta name="description" content="Free GST calculator for India. Calculate GST inclusive and exclusive prices, reverse GST, tax amount, pre-GST price and final price instantly. Unlimited use with no subscription.">
+<meta name="keywords" content="GST calculator, GST calculator India, GST inclusive calculator, GST exclusive calculator, reverse GST calculator, GST tax calculator, calculate GST, GST rate calculator">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="TaxSnap">
+<meta name="theme-color" content="#111827">
+<link rel="canonical" href="https://taxsnap.example.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TaxSnap — Free GST Calculator">
+<meta property="og:description" content="Calculate GST inclusive, exclusive and reverse GST amounts instantly. Free and unlimited.">
+<meta property="og:url" content="https://taxsnap.example.com/">
+<meta property="og:site_name" content="TaxSnap">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"TaxSnap GST Calculator",
+  "url":"https://taxsnap.example.com/",
+  "applicationCategory":"FinanceApplication",
+  "operatingSystem":"Any",
+  "description":"Free GST calculator for inclusive, exclusive and reverse GST calculations.",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+}
+</script>
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+  {"@type":"Question","name":"What is a GST calculator?","acceptedAnswer":{"@type":"Answer","text":"A GST calculator calculates GST tax and the corresponding pre-tax or post-tax amount from a price and GST rate."}},
+  {"@type":"Question","name":"What is GST inclusive calculation?","acceptedAnswer":{"@type":"Answer","text":"GST inclusive calculation starts with a final price that already contains GST and separates the GST amount from the base price."}},
+  {"@type":"Question","name":"What is reverse GST calculation?","acceptedAnswer":{"@type":"Answer","text":"Reverse GST calculation starts with a GST-inclusive final price and works backward to estimate the taxable base and GST component."}},
+  {"@type":"Question","name":"Is TaxSnap free?","acceptedAnswer":{"@type":"Answer","text":"Yes. TaxSnap is designed for free and unlimited use without a subscription."}}
+ ]
+}
+</script>
+
+<style>
+:root{
+ --bg:#f7f8fc;
+ --ink:#171b2d;
+ --muted:#697287;
+ --white:#fff;
+ --line:#e4e7ef;
+ --navy:#111827;
+ --purple:#7048e8;
+ --purple2:#9b6cff;
+ --cyan:#14b8c4;
+ --soft:#f0ecff;
+ --danger:#d1435b;
+ --shadow:0 22px 60px rgba(26,30,55,.11);
+ --radius:24px;
+ --max:1160px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+ font-family:"DM Sans",system-ui,sans-serif;
+ color:var(--ink);
+ background:
+ radial-gradient(circle at 8% 0%,rgba(112,72,232,.11),transparent 30rem),
+ radial-gradient(circle at 94% 12%,rgba(20,184,196,.09),transparent 28rem),
+ var(--bg);
+ line-height:1.7;
+}
+a{text-decoration:none;color:inherit}
+button,input,select{font:inherit}
+.container{width:min(var(--max),calc(100% - 32px));margin:auto}
+
+/* Header */
+.site-header{
+ position:sticky;top:0;z-index:100;
+ background:rgba(247,248,252,.86);
+ backdrop-filter:blur(18px);
+ border-bottom:1px solid rgba(228,231,239,.9);
+}
+.nav{
+ min-height:76px;display:flex;align-items:center;
+ justify-content:space-between;gap:20px;
+}
+.brand{
+ display:flex;align-items:center;gap:10px;
+ font-family:"Space Grotesk",sans-serif;font-weight:700;
+ letter-spacing:-.045em;font-size:21px;
+}
+.logo{
+ width:43px;height:43px;border-radius:14px;
+ display:grid;place-items:center;color:white;
+ background:linear-gradient(145deg,var(--purple),var(--cyan));
+ box-shadow:0 10px 24px rgba(112,72,232,.23);
+ font-size:15px;
+}
+.nav-right{display:flex;align-items:center;gap:5px}
+.nav-link,.more-btn{
+ border:0;background:transparent;color:#4d566b;
+ padding:10px 14px;border-radius:12px;
+ font-weight:700;cursor:pointer;
+}
+.nav-link:hover,.more-btn:hover{background:#eceef5;color:var(--ink)}
+.more-wrap{position:relative}
+.more-menu{
+ display:none;position:absolute;right:0;top:53px;
+ min-width:225px;padding:8px;background:white;
+ border:1px solid var(--line);border-radius:16px;
+ box-shadow:var(--shadow);
+}
+.more-menu.open{display:block}
+.more-menu a{
+ display:block;padding:11px 13px;border-radius:10px;
+ font-weight:700;color:#505a70;
+}
+.more-menu a:hover{background:#f1f3f8}
+
+/* Hero */
+.hero{text-align:center;padding:67px 0 28px}
+.kicker{
+ display:inline-flex;align-items:center;gap:8px;
+ padding:7px 13px;border-radius:999px;
+ background:var(--soft);color:#6440c9;
+ border:1px solid #ddd3ff;font-size:12px;font-weight:800;
+}
+h1{
+ font-family:"Space Grotesk",sans-serif;
+ font-size:clamp(40px,6.2vw,72px);
+ line-height:1.01;letter-spacing:-.07em;
+ max-width:900px;margin:20px auto 17px;
+}
+.hero p{max-width:750px;margin:auto;color:var(--muted);font-size:17px}
+
+/* Ads */
+.ad-label{
+ text-align:center;color:#8a92a4;
+ text-transform:uppercase;letter-spacing:.15em;
+ font-size:9px;margin-bottom:7px;
+}
+.ad-box{
+ min-height:112px;width:100%;
+ display:flex;align-items:center;justify-content:center;
+ overflow:hidden;border:1px dashed #d8dce6;
+ border-radius:18px;background:rgba(255,255,255,.64);
+}
+.top-ad{margin:24px auto 34px}
+
+/* Calculator */
+.calculator{
+ max-width:960px;margin:0 auto 34px;
+ background:var(--white);border:1px solid var(--line);
+ border-radius:28px;box-shadow:var(--shadow);overflow:hidden;
+}
+.calc-head{
+ padding:26px 30px;
+ background:var(--navy);color:white;
+ position:relative;overflow:hidden;
+}
+.calc-head:after{
+ content:"";position:absolute;width:220px;height:220px;
+ border-radius:50%;right:-70px;top:-120px;
+ background:rgba(155,108,255,.2);
+}
+.calc-title-row{
+ position:relative;z-index:1;display:flex;
+ justify-content:space-between;align-items:center;gap:15px;
+}
+.calc-head h2{
+ font-family:"Space Grotesk",sans-serif;font-size:29px;
+ letter-spacing:-.045em;
+}
+.calc-head p{font-size:13px;color:#aeb7cb;margin-top:2px}
+.free-pill{
+ position:relative;z-index:1;padding:7px 11px;
+ border-radius:999px;background:rgba(20,184,196,.14);
+ color:#73e5eb;border:1px solid rgba(115,229,235,.18);
+ font-size:11px;font-weight:800;white-space:nowrap;
+}
+.calc-body{padding:30px}
+.tabs{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:7px;padding:6px;background:#f1f3f8;
+ border-radius:14px;margin-bottom:25px;
+}
+.tab{
+ border:0;background:transparent;border-radius:10px;
+ padding:11px 8px;color:#687288;font-weight:800;
+ cursor:pointer;
+}
+.tab.active{background:white;color:var(--purple);box-shadow:0 3px 12px rgba(30,35,55,.07)}
+.panel{display:none}
+.panel.active{display:block}
+.form-grid{
+ display:grid;grid-template-columns:1fr 1fr;gap:18px;
+}
+.field label{
+ display:block;font-size:13px;font-weight:800;
+ color:#3e475d;margin-bottom:8px;
+}
+.input-money{position:relative}
+.input-money span{
+ position:absolute;left:14px;top:50%;
+ transform:translateY(-50%);
+ color:#7f889b;font-weight:800;
+}
+.field input,.field select{
+ width:100%;padding:14px 15px;
+ border:1px solid var(--line);border-radius:14px;
+ background:#fafbfe;color:var(--ink);outline:0;
+ transition:.2s;
+}
+.input-money input{padding-left:32px}
+.field input:focus,.field select:focus{
+ background:white;border-color:#9176ed;
+ box-shadow:0 0 0 4px rgba(112,72,232,.09);
+}
+.hint{font-size:11px;color:#8b94a7;margin-top:6px}
+.error{display:none;color:var(--danger);font-size:11px;font-weight:700;margin-top:6px}
+.error.show{display:block}
+.actions{display:flex;gap:12px;margin-top:24px}
+.btn{
+ border:0;border-radius:14px;padding:14px 20px;
+ font-weight:800;cursor:pointer;transition:.2s;
+}
+.btn:hover{transform:translateY(-1px)}
+.primary{
+ flex:1;color:white;
+ background:linear-gradient(135deg,var(--purple),var(--purple2));
+ box-shadow:0 11px 25px rgba(112,72,232,.19);
+}
+.secondary{background:#edf0f6;color:#4c566b}
+
+/* Result */
+.result{
+ display:none;margin-top:24px;padding:23px;
+ border-radius:20px;border:1px solid #dcd4ff;
+ background:linear-gradient(135deg,#f7f4ff,#eefafa);
+}
+.result.show{display:block}
+.result-top{
+ display:flex;justify-content:space-between;align-items:flex-end;
+ gap:20px;margin-bottom:17px;
+}
+.result-label{font-size:12px;color:#747e92;font-weight:800}
+.result-main{
+ font-family:"Space Grotesk",sans-serif;
+ font-size:clamp(34px,5vw,52px);
+ line-height:1.05;letter-spacing:-.06em;
+}
+.result-sub{font-size:12px;color:#788398;margin-top:6px}
+.breakdown{
+ display:grid;grid-template-columns:repeat(4,1fr);gap:9px;
+}
+.mini{
+ padding:12px;background:rgba(255,255,255,.7);
+ border:1px solid #e1e4ed;border-radius:13px;
+}
+.mini span{display:block;color:#8992a5;font-size:10px}
+.mini strong{display:block;margin-top:2px;font-size:14px}
+
+/* Content */
+.content{max-width:970px;margin:56px auto 0}
+.content h2{
+ font-family:"Space Grotesk",sans-serif;
+ font-size:32px;line-height:1.18;
+ letter-spacing:-.045em;margin:44px 0 12px;
+}
+.content h3{font-size:20px;margin:28px 0 7px}
+.content p{color:#667188;margin:10px 0}
+.content ul{padding-left:23px;color:#667188}
+.content li{margin:7px 0}
+.info{
+ background:white;border:1px solid var(--line);
+ border-radius:18px;padding:21px;margin:22px 0;
+ box-shadow:0 9px 28px rgba(25,30,55,.04);
+}
+.info strong{color:var(--ink)}
+.bottom-ad{margin:36px auto 20px}
+
+/* FAQ */
+.faq{max-width:970px;margin:53px auto}
+.faq h2{
+ font-family:"Space Grotesk",sans-serif;
+ font-size:32px;letter-spacing:-.045em;margin-bottom:18px;
+}
+details{
+ background:white;border:1px solid var(--line);
+ border-radius:15px;margin:10px 0;
+}
+summary{
+ cursor:pointer;list-style:none;padding:17px 18px;
+ font-weight:800;
+}
+summary::-webkit-details-marker{display:none}
+details p{color:#68738a;padding:0 18px 18px}
+
+/* Footer */
+footer{
+ margin-top:72px;padding:35px 0 45px;
+ background:white;border-top:1px solid var(--line);
+}
+.footer-inner{
+ display:flex;justify-content:space-between;
+ align-items:center;gap:25px;
+}
+.footer-brand .brand{margin-bottom:7px}
+.copyright{font-size:12px;color:#8a93a5}
+.footer-links{
+ display:flex;gap:18px;flex-wrap:wrap;
+ color:#707a8e;font-size:13px;font-weight:700;
+}
+.footer-links a:hover{color:var(--purple)}
+
+@media(max-width:720px){
+ .container{width:calc(100% - 20px)}
+ .nav{min-height:68px}
+ .brand{font-size:18px}
+ .logo{width:38px;height:38px}
+ .nav-link{display:none}
+ .hero{padding:48px 0 20px}
+ h1{font-size:42px}
+ .hero p{font-size:15px}
+ .ad-box{min-height:68px}
+ .calculator{border-radius:22px}
+ .calc-head{padding:22px 19px}
+ .calc-head h2{font-size:24px}
+ .calc-body{padding:20px}
+ .tabs{grid-template-columns:1fr}
+ .tab{padding:10px}
+ .form-grid{grid-template-columns:1fr}
+ .actions{flex-direction:column}
+ .result-top{display:block}
+ .breakdown{grid-template-columns:1fr 1fr}
+ .content h2,.faq h2{font-size:27px}
+ .footer-inner{align-items:flex-start;flex-direction:column}
+}
+</style>
+</head>
+
+<body>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="#home" aria-label="TaxSnap home">
+      <span class="logo">TS</span>
+      <span>TaxSnap</span>
+    </a>
+    <div class="nav-right">
+      <a class="nav-link" href="#home">Home</a>
+      <div class="more-wrap">
+        <button class="more-btn" id="moreBtn" aria-expanded="false">More Tools ▾</button>
+        <div class="more-menu" id="moreMenu">
+          <a href="https://fixorra.tech/" target="_blank" rel="noopener">Explore More Tools ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="home">
+<section class="hero container">
+  <span class="kicker">✦ Free forever · No subscription · Unlimited use</span>
+  <h1>GST Math, Without the Headache.</h1>
+  <p>Calculate GST inclusive, exclusive and reverse GST amounts in seconds. Enter your price and rate to instantly see the base value, GST amount and final price.</p>
+</section>
+
+<section class="container top-ad" aria-label="Advertisement">
+  <div class="ad-label">Advertisement</div>
+  <div class="ad-box">
+    <script>
+      atOptions = {
+        'key' : '4e68ac77881c17fe128a46565d9a4e8c',
+        'format' : 'iframe',
+        'height' : 90,
+        'width' : 728,
+        'params' : {}
+      };
+    </script>
+    <script src="https://www.highrevenueformat.com/4e68ac77881c17fe128a46565d9a4e8c/invoke.js"></script>
+  </div>
+</section>
+
+<section class="calculator" aria-labelledby="calcTitle">
+  <div class="calc-head">
+    <div class="calc-title-row">
+      <div>
+        <h2 id="calcTitle">GST Calculator</h2>
+        <p>Inclusive · Exclusive · Reverse GST</p>
+      </div>
+      <span class="free-pill">100% FREE</span>
+    </div>
+  </div>
+
+  <div class="calc-body">
+    <div class="tabs" role="tablist" aria-label="GST calculation mode">
+      <button class="tab active" data-panel="exclusive" role="tab">GST Exclusive</button>
+      <button class="tab" data-panel="inclusive" role="tab">GST Inclusive</button>
+      <button class="tab" data-panel="reverse" role="tab">Reverse GST</button>
+    </div>
+
+    <div class="panel active" id="exclusive">
+      <div class="form-grid">
+        <div class="field">
+          <label for="exPrice">Price before GST</label>
+          <div class="input-money"><span>₹</span><input id="exPrice" type="number" min="0" step="0.01" placeholder="e.g. 10000" inputmode="decimal"></div>
+          <div class="hint">Enter the taxable/base price.</div>
+          <div class="error" id="exPriceError">Enter a valid price greater than zero.</div>
+        </div>
+        <div class="field">
+          <label for="exRate">GST rate</label>
+          <select id="exRate">
+            <option value="0">0%</option>
+            <option value="0.25">0.25%</option>
+            <option value="3">3%</option>
+            <option value="5">5%</option>
+            <option value="12">12%</option>
+            <option value="18" selected>18%</option>
+            <option value="28">28%</option>
+            <option value="custom">Custom rate</option>
+          </select>
+          <div class="hint">Choose a common GST rate or select custom.</div>
+        </div>
+        <div class="field custom-rate" id="exCustomWrap" style="display:none">
+          <label for="exCustom">Custom GST rate (%)</label>
+          <input id="exCustom" type="number" min="0" step="0.01" placeholder="e.g. 7.5">
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="exCalculate">Calculate GST</button>
+        <button class="btn secondary reset-all">Reset</button>
+      </div>
+      <div class="result" id="exResult" aria-live="polite">
+        <div class="result-top">
+          <div><div class="result-label">Final price including GST</div><div class="result-main" id="exTotal">₹0</div><div class="result-sub">GST is added to the base price.</div></div>
+        </div>
+        <div class="breakdown">
+          <div class="mini"><span>Base price</span><strong id="exBase">₹0</strong></div>
+          <div class="mini"><span>GST amount</span><strong id="exTax">₹0</strong></div>
+          <div class="mini"><span>GST rate</span><strong id="exRateOut">0%</strong></div>
+          <div class="mini"><span>CGST + SGST</span><strong id="exSplit">₹0 + ₹0</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="inclusive">
+      <div class="form-grid">
+        <div class="field">
+          <label for="inPrice">Price including GST</label>
+          <div class="input-money"><span>₹</span><input id="inPrice" type="number" min="0" step="0.01" placeholder="e.g. 11800" inputmode="decimal"></div>
+          <div class="hint">Enter the final price already containing GST.</div>
+          <div class="error" id="inPriceError">Enter a valid inclusive price greater than zero.</div>
+        </div>
+        <div class="field">
+          <label for="inRate">GST rate</label>
+          <select id="inRate">
+            <option value="0">0%</option>
+            <option value="0.25">0.25%</option>
+            <option value="3">3%</option>
+            <option value="5">5%</option>
+            <option value="12">12%</option>
+            <option value="18" selected>18%</option>
+            <option value="28">28%</option>
+            <option value="custom">Custom rate</option>
+          </select>
+          <div class="hint">Select the GST rate included in the price.</div>
+        </div>
+        <div class="field" id="inCustomWrap" style="display:none">
+          <label for="inCustom">Custom GST rate (%)</label>
+          <input id="inCustom" type="number" min="0" step="0.01" placeholder="e.g. 7.5">
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="inCalculate">Separate GST</button>
+        <button class="btn secondary reset-all">Reset</button>
+      </div>
+      <div class="result" id="inResult" aria-live="polite">
+        <div class="result-top">
+          <div><div class="result-label">Price before GST</div><div class="result-main" id="inBase">₹0</div><div class="result-sub">The GST component has been separated from the final price.</div></div>
+        </div>
+        <div class="breakdown">
+          <div class="mini"><span>Inclusive price</span><strong id="inTotal">₹0</strong></div>
+          <div class="mini"><span>GST amount</span><strong id="inTax">₹0</strong></div>
+          <div class="mini"><span>GST rate</span><strong id="inRateOut">0%</strong></div>
+          <div class="mini"><span>CGST + SGST</span><strong id="inSplit">₹0 + ₹0</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="reverse">
+      <div class="form-grid">
+        <div class="field">
+          <label for="rvPrice">Final price including GST</label>
+          <div class="input-money"><span>₹</span><input id="rvPrice" type="number" min="0" step="0.01" placeholder="e.g. 11800" inputmode="decimal"></div>
+          <div class="hint">Reverse the GST component from a final price.</div>
+          <div class="error" id="rvPriceError">Enter a valid final price greater than zero.</div>
+        </div>
+        <div class="field">
+          <label for="rvRate">GST rate</label>
+          <select id="rvRate">
+            <option value="0">0%</option>
+            <option value="0.25">0.25%</option>
+            <option value="3">3%</option>
+            <option value="5">5%</option>
+            <option value="12">12%</option>
+            <option value="18" selected>18%</option>
+            <option value="28">28%</option>
+            <option value="custom">Custom rate</option>
+          </select>
+          <div class="hint">Choose the rate that is included in the final amount.</div>
+        </div>
+        <div class="field" id="rvCustomWrap" style="display:none">
+          <label for="rvCustom">Custom GST rate (%)</label>
+          <input id="rvCustom" type="number" min="0" step="0.01" placeholder="e.g. 7.5">
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="rvCalculate">Reverse GST</button>
+        <button class="btn secondary reset-all">Reset</button>
+      </div>
+      <div class="result" id="rvResult" aria-live="polite">
+        <div class="result-top">
+          <div><div class="result-label">Base price after removing GST</div><div class="result-main" id="rvBase">₹0</div><div class="result-sub">Useful for breaking a GST-inclusive amount into base value and tax.</div></div>
+        </div>
+        <div class="breakdown">
+          <div class="mini"><span>Final price</span><strong id="rvTotal">₹0</strong></div>
+          <div class="mini"><span>GST amount</span><strong id="rvTax">₹0</strong></div>
+          <div class="mini"><span>GST rate</span><strong id="rvRateOut">0%</strong></div>
+          <div class="mini"><span>CGST + SGST</span><strong id="rvSplit">₹0 + ₹0</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<article class="content">
+<h2>GST Calculator: Complete Guide</h2>
+<p>Goods and Services Tax, commonly known as GST, is an indirect tax applied to many supplies of goods and services in India. A GST calculator makes it easier to add GST to a taxable price, separate GST from a tax-inclusive price, or work backward from a final amount.</p>
+<p>TaxSnap is built as a simple browser-based GST calculator with three calculation modes: GST exclusive, GST inclusive and reverse GST. It is free to use and designed for unlimited calculations without a subscription.</p>
+
+<div class="info"><strong>Important:</strong><p>This calculator is an arithmetic tool for estimates and educational use. GST classification, applicable rates, invoicing rules, input tax credit, place-of-supply rules and other compliance requirements can depend on the transaction. Verify important GST decisions against current official rules or a qualified tax professional.</p></div>
+
+<h2>What is a GST calculator?</h2>
+<p>A GST calculator is a tool that performs the mathematical steps needed to calculate a GST amount and the corresponding taxable or final price. Instead of manually applying a percentage, you enter the price and GST rate and let the calculator perform the calculation.</p>
+<p>The same basic percentage can be used in different ways. When a price is before GST, the tax is added. When a price already contains GST, the tax component needs to be separated rather than simply calculating the GST percentage of the final amount.</p>
+
+<h2>GST exclusive calculation</h2>
+<p>A GST-exclusive price is a price before GST has been added. For example, if the taxable value is ₹10,000 and the applicable GST rate is 18%, the GST amount is ₹1,800 and the final price becomes ₹11,800.</p>
+<p>The general formula is:</p>
+<p><strong>GST amount = Taxable value × GST rate ÷ 100</strong></p>
+<p><strong>Final price = Taxable value + GST amount</strong></p>
+<p>The GST Exclusive tab in TaxSnap performs these calculations automatically.</p>
+
+<h2>GST inclusive calculation</h2>
+<p>A GST-inclusive price already contains GST. If the final price is ₹11,800 and the applicable GST rate is 18%, the base price is ₹10,000 and the GST component is ₹1,800.</p>
+<p>The base value can be calculated as:</p>
+<p><strong>Base price = Inclusive price ÷ (1 + GST rate ÷ 100)</strong></p>
+<p>The GST component is then:</p>
+<p><strong>GST = Inclusive price − Base price</strong></p>
+<p>This is different from simply multiplying the inclusive price by the GST percentage. That common mistake can produce an incorrect tax component.</p>
+
+<h2>What is reverse GST?</h2>
+<p>Reverse GST calculation in a calculator context means working backward from a final GST-inclusive amount to determine the underlying taxable value and GST component. It is useful when you know the amount charged to a customer but want to understand how much of that amount represents the base price and how much represents GST.</p>
+<p>TaxSnap's Reverse GST tab uses the inclusive-price formula to separate the tax component.</p>
+
+<h2>GST calculation formula</h2>
+<p>For an exclusive calculation, if the base price is P and the GST rate is R, the GST amount is P × R ÷ 100 and the final price is P × (1 + R ÷ 100).</p>
+<p>For an inclusive calculation, if the final price is T, the base value is T ÷ (1 + R ÷ 100), while the GST amount is T minus the base value.</p>
+
+<h2>GST example at 18%</h2>
+<p>Suppose a product has a taxable value of ₹10,000 and GST is 18%. GST is ₹1,800, so the customer-facing total is ₹11,800. If you start with ₹11,800 instead, the inclusive and reverse calculations recover a base value of approximately ₹10,000 and GST of approximately ₹1,800.</p>
+<p>Small differences can occur when invoices round individual amounts to the required currency precision. Always follow the rounding convention used for the actual invoice and accounting system.</p>
+
+<h2>GST rates</h2>
+<p>GST rates can vary according to the nature and classification of goods or services. Common rates encountered in India include 0%, 5%, 12%, 18% and 28%, while certain supplies can fall under other specific rates or structures.</p>
+<p>TaxSnap includes several commonly used rates for convenience and also provides a custom-rate option. Selecting a rate in the calculator does not determine whether that rate legally applies to your transaction.</p>
+
+<h2>What is CGST and SGST?</h2>
+<p>For an eligible intra-state supply where the applicable GST is split between Central GST and State GST, the total GST can commonly be divided equally between CGST and SGST when the rate is structured that way. For example, an 18% total GST may be represented as 9% CGST plus 9% SGST.</p>
+<p>TaxSnap displays an illustrative 50/50 split of the calculated total GST in its breakdown. The actual tax treatment of a transaction depends on the supply and applicable rules.</p>
+
+<h2>What is IGST?</h2>
+<p>Integrated GST, or IGST, is used for applicable inter-state supplies and certain other transactions under the GST framework. Unlike a CGST plus SGST split, an applicable IGST amount is generally shown as one integrated tax component.</p>
+<p>This calculator focuses on total GST mathematics and does not determine whether a transaction should use CGST plus SGST or IGST.</p>
+
+<h2>How to calculate GST manually</h2>
+<p>To calculate GST on a price before tax, convert the GST percentage into a decimal and multiply it by the taxable value. For an 18% rate, the multiplier is 0.18. Add the resulting GST to the taxable value to obtain the inclusive amount.</p>
+<p>For an inclusive price, divide the final amount by 1.18 for an 18% rate to recover the base value. Subtract that base value from the final amount to get the GST component.</p>
+
+<h2>GST inclusive vs GST exclusive</h2>
+<p>The key difference is where you start. GST-exclusive calculations start with the pre-tax taxable value and add GST. GST-inclusive calculations start with the final amount and separate GST from it.</p>
+<ul>
+<li><strong>Exclusive:</strong> base price → GST added → final price.</li>
+<li><strong>Inclusive:</strong> final price → GST separated → base price.</li>
+<li><strong>Reverse:</strong> final price → GST removed mathematically → taxable base.</li>
+</ul>
+
+<h2>Common GST calculation mistakes</h2>
+<h3>Applying GST percentage directly to an inclusive amount</h3>
+<p>If a final amount already includes GST, multiplying the entire final amount by the GST rate is generally not the correct way to isolate the embedded GST. The inclusive formula should be used instead.</p>
+<h3>Mixing GST rates</h3>
+<p>Always use the rate that actually applies to the supply being calculated. A calculator can perform any mathematical rate you enter, but it cannot establish the legal classification of your product or service.</p>
+<h3>Forgetting rounding</h3>
+<p>Invoice systems may round tax amounts and line items. A calculator can display decimal values, while an actual invoice may apply specific rounding rules.</p>
+<h3>Confusing tax with total price</h3>
+<p>The GST amount is only the tax component. The customer-facing total can include the taxable value plus GST and potentially other permitted charges or adjustments.</p>
+
+<h2>GST calculator for business owners</h2>
+<p>Business owners can use a GST calculator for quick price checks, quotations, product pricing exercises and preliminary invoice calculations. It can help answer questions such as how much GST is added to a base price or what the pre-tax value is inside a GST-inclusive amount.</p>
+<p>For accounting and filing, however, use proper books and current compliance procedures. A calculator should not replace accounting records or professional advice.</p>
+
+<h2>GST calculator for shopkeepers</h2>
+<p>Retailers and shopkeepers often encounter prices that are displayed either before or after GST. The inclusive and exclusive modes can help quickly understand the relationship between the two values.</p>
+<p>If you know the selling price and GST rate, reverse GST can show an estimated taxable value. If you know the taxable value, exclusive GST can show the tax-inclusive selling price.</p>
+
+<h2>GST calculator for freelancers</h2>
+<p>Freelancers and service providers can use the calculator to understand the arithmetic of adding a GST percentage to a quoted taxable amount. Before issuing an invoice, confirm whether GST registration and the applicable rate or exemption rules apply to your specific situation.</p>
+
+<h2>GST calculator for invoices</h2>
+<p>For an invoice, the taxable value, applicable tax rate and resulting tax amount should be consistent with the transaction and applicable rules. TaxSnap can provide a quick arithmetic cross-check, but it does not validate invoice compliance.</p>
+
+<h2>GST and discounts</h2>
+<p>When a discount affects the taxable value, the GST calculation can need to be based on the appropriate value after considering the relevant discount rules. Do not simply add GST to the original list price if the taxable value has legitimately changed.</p>
+
+<h2>GST and product pricing</h2>
+<p>Businesses may think about pricing either as a pre-tax price or a final customer-facing price. If you set a price before GST, use the exclusive calculator to find the final amount. If you have a target final price, use inclusive or reverse GST to understand the embedded tax.</p>
+
+<h2>Why use an online GST calculator?</h2>
+<p>Percentage calculations are simple, but repeatedly switching between inclusive and exclusive values can be inconvenient. An online calculator reduces manual arithmetic and makes scenario testing faster.</p>
+<p>TaxSnap is designed for quick repeated use. There is no account creation requirement for the calculator and no subscription required for unlimited calculations.</p>
+
+<h2>GST calculator with custom rate</h2>
+<p>Not every calculation needs to use a common rate. TaxSnap includes a custom percentage field so you can perform mathematical calculations with another rate when needed.</p>
+<p>Remember that the custom-rate feature is only a mathematical input. It does not mean the selected percentage is legally applicable to your transaction.</p>
+
+<h2>How to use the GST calculator</h2>
+<ul>
+<li>Select GST Exclusive if your starting amount is before GST.</li>
+<li>Select GST Inclusive if your starting amount already contains GST.</li>
+<li>Select Reverse GST if you want to work backward from a final GST-inclusive amount.</li>
+<li>Enter the amount.</li>
+<li>Select the GST rate or enter a custom percentage.</li>
+<li>Click the calculation button.</li>
+<li>Review the base value, GST amount, rate and final amount.</li>
+</ul>
+
+<h2>Is reverse GST the same as removing GST?</h2>
+<p>For a GST-inclusive price, reverse GST mathematically separates the embedded GST from the final amount. It is not a cancellation of a tax obligation and does not change the legal status of a transaction.</p>
+
+<h2>Can GST be calculated on any percentage?</h2>
+<p>Mathematically, the calculator can apply a custom percentage. Legally, however, the correct GST rate depends on the supply and current tax rules. Use the custom rate only when you already know the appropriate rate for your calculation.</p>
+
+<h2>Does GST apply to every product and service?</h2>
+<p>No single calculator setting can determine GST applicability. Different goods, services, taxpayers and transactions can have different treatment. Some supplies can be exempt, zero-rated or subject to special provisions.</p>
+
+<h2>GST and tax-inclusive price example</h2>
+<p>If a final price is ₹5,900 and the GST rate is 18%, the base amount is found by dividing ₹5,900 by 1.18. The remaining amount represents the embedded GST. The calculator performs this calculation automatically and displays both components.</p>
+
+<h2>GST and tax-exclusive price example</h2>
+<p>If a base price is ₹5,000 and GST is 18%, the tax amount is ₹900 and the final price is ₹5,900. The exclusive mode is useful when a business starts with a taxable price and needs to calculate the customer-facing total.</p>
+
+<h2>Accuracy and rounding</h2>
+<p>TaxSnap calculates using JavaScript number arithmetic and formats displayed values as Indian rupees. For normal everyday calculations this is convenient, but accounting systems can apply their own rounding at line or invoice level. Use the official accounting result for final books and filings.</p>
+
+<h2>Privacy and browser-based calculation</h2>
+<p>The core GST arithmetic is performed in the browser. The calculator does not require a subscription to calculate. Advertising services embedded on a deployed website can have their own privacy policies and data practices.</p>
+
+<h2>Important compliance reminder</h2>
+<p>GST compliance includes more than percentage arithmetic. Registration, invoicing, returns, input tax credit, e-invoicing, place of supply, classification and rate determination can all matter. This tool does not perform those compliance functions.</p>
+
+<h2>GST calculator for students and learners</h2>
+<p>Students can use the calculator to understand percentages, tax-inclusive pricing and reverse calculations. Trying the same amount at different rates can make the relationship between taxable value, tax and final price easier to understand.</p>
+
+<h2>GST calculator for quick price comparison</h2>
+<p>If you are comparing two quoted prices, first determine whether each price is GST-inclusive or exclusive. Comparing one inclusive price against one exclusive price without adjustment can make the cheaper option appear misleadingly different.</p>
+
+<h2>GST calculation checklist</h2>
+<ul>
+<li>Identify whether the starting amount is inclusive or exclusive of GST.</li>
+<li>Confirm the applicable GST rate.</li>
+<li>Keep the amount in the same currency and unit.</li>
+<li>Check whether discounts or other adjustments affect taxable value.</li>
+<li>Review rounding before putting the number on an invoice.</li>
+<li>Verify legal and compliance details independently.</li>
+</ul>
+
+<h2>About TaxSnap</h2>
+<p>TaxSnap is a browser-based financial calculator brand focused on making everyday tax and pricing calculations simple. The GST calculator is designed for fast use on desktop and mobile devices, with separate modes for inclusive, exclusive and reverse GST calculations.</p>
+
+<h2>Explore more free tools</h2>
+<p>Need more calculators and browser utilities? Open the More Tools menu above to explore the wider collection at Fixorra.tech.</p>
+</article>
+
+<section class="container bottom-ad" aria-label="Advertisement">
+  <div class="ad-label">Advertisement</div>
+  <div class="ad-box"><div data-banner-id="1501463"></div></div>
+</section>
+
+<section class="faq container" id="faq">
+<h2>Frequently Asked Questions</h2>
+<details><summary>What is a GST calculator?</summary><p>A GST calculator performs the arithmetic needed to add GST to a base amount or separate GST from a GST-inclusive amount.</p></details>
+<details><summary>What is GST exclusive?</summary><p>GST exclusive means the entered price does not yet include GST. The calculator adds the selected GST rate to produce the final amount.</p></details>
+<details><summary>What is GST inclusive?</summary><p>GST inclusive means the entered amount already contains GST. The calculator separates the base value and GST component.</p></details>
+<details><summary>What is reverse GST?</summary><p>Reverse GST works backward from a GST-inclusive final price to estimate the underlying taxable value and GST component.</p></details>
+<details><summary>Can I use a custom GST rate?</summary><p>Yes. Select Custom rate and enter the percentage you want the calculator to apply mathematically.</p></details>
+<details><summary>Is TaxSnap free?</summary><p>Yes. TaxSnap is designed for free and unlimited use without a subscription.</p></details>
+<details><summary>Does the calculator decide the correct GST rate?</summary><p>No. You must select the rate. Correct GST classification and rate determination depend on the transaction and current applicable rules.</p></details>
+<details><summary>Does it calculate CGST and SGST?</summary><p>The breakdown shows an illustrative equal split of total GST into two halves. It does not determine whether CGST and SGST legally apply to a particular transaction.</p></details>
+<details><summary>Does it calculate IGST?</summary><p>The calculator focuses on total GST arithmetic and does not determine whether a transaction should use IGST.</p></details>
+<details><summary>Can I use this for an actual invoice?</summary><p>You can use it as an arithmetic cross-check, but final invoices should be prepared according to current GST rules and your accounting process.</p></details>
+</section>
+</main>
+
+<footer>
+<div class="container footer-inner">
+ <div class="footer-brand">
+  <div class="brand"><span class="logo">TS</span><span>TaxSnap</span></div>
+  <div class="copyright">© <span id="year"></span> TaxSnap. All rights reserved.</div>
+ </div>
+ <div class="footer-links">
+  <a href="#home">Home</a>
+  <a href="#faq">FAQ</a>
+  <a href="/terms.html">Terms</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="https://fixorra.tech/" target="_blank" rel="noopener">More Tools</a>
+ </div>
+</div>
+</footer>
+
+<script>
+const money = new Intl.NumberFormat("en-IN",{
+  style:"currency",currency:"INR",maximumFractionDigits:2
+});
+
+function getRate(selectId, customId){
+  const select=document.getElementById(selectId);
+  if(select.value==="custom"){
+    const value=Number(document.getElementById(customId).value);
+    return Number.isFinite(value) && value>=0 ? value : null;
+  }
+  return Number(select.value);
+}
+
+function setError(id,show){
+  document.getElementById(id).classList.toggle("show",show);
+}
+
+function showResult(id){
+  document.getElementById(id).classList.add("show");
+}
+
+function hideAllResults(){
+  document.querySelectorAll(".result").forEach(el=>el.classList.remove("show"));
+}
+
+function splitGST(tax){
+  return `${money.format(tax/2)} + ${money.format(tax/2)}`;
+}
+
+/* Tabs */
+document.querySelectorAll(".tab").forEach(tab=>{
+  tab.addEventListener("click",()=>{
+    document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
+    tab.classList.add("active");
+    document.getElementById(tab.dataset.panel).classList.add("active");
+  });
+});
+
+/* Custom-rate visibility */
+function customToggle(selectId,wrapId){
+  const select=document.getElementById(selectId);
+  const wrap=document.getElementById(wrapId);
+  const toggle=()=>wrap.style.display=select.value==="custom"?"block":"none";
+  select.addEventListener("change",toggle);
+  toggle();
+}
+customToggle("exRate","exCustomWrap");
+customToggle("inRate","inCustomWrap");
+customToggle("rvRate","rvCustomWrap");
+
+/* Exclusive */
+document.getElementById("exCalculate").addEventListener("click",()=>{
+  const price=Number(document.getElementById("exPrice").value);
+  const rate=getRate("exRate","exCustom");
+  const badPrice=!Number.isFinite(price)||price<=0;
+  const badRate=rate===null||rate<0;
+  setError("exPriceError",badPrice);
+  if(badPrice||badRate){document.getElementById("exResult").classList.remove("show");return;}
+  const tax=price*rate/100;
+  const total=price+tax;
+  document.getElementById("exTotal").textContent=money.format(total);
+  document.getElementById("exBase").textContent=money.format(price);
+  document.getElementById("exTax").textContent=money.format(tax);
+  document.getElementById("exRateOut").textContent=rate+"%";
+  document.getElementById("exSplit").textContent=splitGST(tax);
+  showResult("exResult");
+});
+
+/* Inclusive */
+document.getElementById("inCalculate").addEventListener("click",()=>{
+  const total=Number(document.getElementById("inPrice").value);
+  const rate=getRate("inRate","inCustom");
+  const badPrice=!Number.isFinite(total)||total<=0;
+  const badRate=rate===null||rate<0;
+  setError("inPriceError",badPrice);
+  if(badPrice||badRate){document.getElementById("inResult").classList.remove("show");return;}
+  const base=total/(1+rate/100);
+  const tax=total-base;
+  document.getElementById("inBase").textContent=money.format(base);
+  document.getElementById("inTotal").textContent=money.format(total);
+  document.getElementById("inTax").textContent=money.format(tax);
+  document.getElementById("inRateOut").textContent=rate+"%";
+  document.getElementById("inSplit").textContent=splitGST(tax);
+  showResult("inResult");
+});
+
+/* Reverse */
+document.getElementById("rvCalculate").addEventListener("click",()=>{
+  const total=Number(document.getElementById("rvPrice").value);
+  const rate=getRate("rvRate","rvCustom");
+  const badPrice=!Number.isFinite(total)||total<=0;
+  const badRate=rate===null||rate<0;
+  setError("rvPriceError",badPrice);
+  if(badPrice||badRate){document.getElementById("rvResult").classList.remove("show");return;}
+  const base=total/(1+rate/100);
+  const tax=total-base;
+  document.getElementById("rvBase").textContent=money.format(base);
+  document.getElementById("rvTotal").textContent=money.format(total);
+  document.getElementById("rvTax").textContent=money.format(tax);
+  document.getElementById("rvRateOut").textContent=rate+"%";
+  document.getElementById("rvSplit").textContent=splitGST(tax);
+  showResult("rvResult");
+});
+
+/* Reset */
+document.querySelectorAll(".reset-all").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll("input").forEach(input=>input.value="");
+    document.querySelectorAll("select").forEach(select=>{
+      if(select.id==="exRate"||select.id==="inRate"||select.id==="rvRate")select.value="18";
+    });
+    document.querySelectorAll(".error").forEach(el=>el.classList.remove("show"));
+    hideAllResults();
+    document.querySelectorAll(".custom-rate").forEach(el=>el.style.display="none");
+    document.getElementById("exPrice").focus();
+  });
+});
+
+/* Enter key */
+["exPrice","exCustom","inPrice","inCustom","rvPrice","rvCustom"].forEach(id=>{
+  document.getElementById(id).addEventListener("keydown",e=>{
+    if(e.key!=="Enter")return;
+    const active=document.querySelector(".panel.active");
+    active.querySelector(".primary").click();
+  });
+});
+
+/* More tools menu */
+const moreBtn=document.getElementById("moreBtn");
+const moreMenu=document.getElementById("moreMenu");
+moreBtn.addEventListener("click",()=>{
+  const open=moreMenu.classList.toggle("open");
+  moreBtn.setAttribute("aria-expanded",open?"true":"false");
+});
+document.addEventListener("click",e=>{
+  if(!e.target.closest(".more-wrap")){
+    moreMenu.classList.remove("open");
+    moreBtn.setAttribute("aria-expanded","false");
+  }
+});
+
+document.getElementById("year").textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
